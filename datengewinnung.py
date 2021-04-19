@@ -12,7 +12,7 @@ from pathlib import Path;
 
 # Funktionen
 def indikatorImport(dataIst, dataSoll, landIst, landSoll):
-    print("entry: " + str(dataIst) + " / " + str(dataSoll) + "\t Land: " + str(landIst) + " / " + str(landSoll));
+    print("Land: " + str(dataIst) + " / " + str(dataSoll) + "\t Entry: " + str(landIst) + " / " + str(landSoll));
 
 def chkFileDel(fileN):
     if Path(fileN).is_file():
