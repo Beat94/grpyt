@@ -23,6 +23,7 @@ def chkFileDel(fileN):
 # variabeln definieren
 file1 = "country.csv";
 file2 = "ansteckung.csv";
+sleepCount = 10;
 
 # csv-open
 chkFileDel(file1);
@@ -55,13 +56,13 @@ while(count < len(countryRequest.json())):
     fallRequest = requests.get('https://api.covid19api.com/country/' + countryRequest.json()[count]["Country"]);
     if(fallRequest.status_code != 200):
         print("Connection zu API 2 gefailed");
-        quit();
-    
-    count1 = 0
-    while(count1 < len(fallRequest.json())):
-        writerTable2.writerow([fallRequest.json()[count1]["Country"], fallRequest.json()[count1]["CountryCode"], fallRequest.json()[count1]["Province"], fallRequest.json()[count1]["City"], fallRequest.json()[count1]["Lat"], fallRequest.json()[count1]["Lon"], fallRequest.json()[count1]["Confirmed"], fallRequest.json()[count1]["Deaths"], fallRequest.json()[count1]["Recovered"], fallRequest.json()[count1]["Active"], fallRequest.json()[count1]["Date"]]);
-        indikatorImport(count, len(countryRequest.json()), count1, len(fallRequest.json()));
-        count1 = count1 + 1;
-    time.sleep(10)
-    count = count + 1;
+        sleepCount = sleepCount + 5;
+    else:
+        count1 = 0
+        while(count1 < len(fallRequest.json())):
+            writerTable2.writerow([fallRequest.json()[count1]["Country"], fallRequest.json()[count1]["CountryCode"], fallRequest.json()[count1]["Province"], fallRequest.json()[count1]["City"], fallRequest.json()[count1]["Lat"], fallRequest.json()[count1]["Lon"], fallRequest.json()[count1]["Confirmed"], fallRequest.json()[count1]["Deaths"], fallRequest.json()[count1]["Recovered"], fallRequest.json()[count1]["Active"], fallRequest.json()[count1]["Date"]]);
+            indikatorImport(count, len(countryRequest.json()), count1, len(fallRequest.json()));
+            count1 = count1 + 1;
+        count = count + 1;
+    time.sleep(sleepCount);
 
