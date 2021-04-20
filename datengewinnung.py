@@ -23,7 +23,7 @@ def chkFileDel(fileN):
 # variabeln definieren
 file1 = "country.csv";
 file2 = "ansteckung.csv";
-sleepCount = 10;
+sleepCount = 20;
 
 # csv-open
 chkFileDel(file1);
